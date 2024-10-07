@@ -1,0 +1,33 @@
+
+from chap4.ml_model_class import MlModel
+from sklearn.ensemble import GradientBoostingRegressor, RandomForestRegressor
+import pandas as pd
+import time
+
+parameters = {"n_estimators": (50, 100, 150, 200),
+              "max_depth": (1, 2),
+              "min_samples_split": (100, 250, 500, 750, 1000)
+                 }
+njobs = [1, 2, 4, 8, -1]
+
+#read and prepare the dataset
+artists = pd.read_csv("data/artists.csv")
+
+artists = artists.dropna().reset_index(drop = True)
+
+artists['num_genres'] = artists.genres.map(len)
+features = ["followers", "num_genres"]
+
+#loop through different values of n_jobs
+for njobs in njobs.values:
+    forest = MlModel(ml_model = RandomForestRegressor(),
+                    parameters = parameters,
+                    n_jobs = njobs,
+                    scoring = "neg_mean_squared_error",
+                    n_iter = 5,
+                    random_state = 0)
+
+    start = time.time()
+    forest.tune(artists[features], artists.popularity)
+    end = time.time()
+    print(f"Completed with n_jobs {njobs} ", end - start, " seconds")

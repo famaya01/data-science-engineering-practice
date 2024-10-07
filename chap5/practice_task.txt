@@ -1,0 +1,6 @@
+
+1 - Download the Spotify hit zip file from Kaggle (https://www.kaggle.com/datasets/theoverman/the-spotify-hit-predictor-dataset). This file contains a collection of datasets across multiple song-release decades (90s, 00s, 10s, etc). Use tqdm to monitor the progress of reading each in as part of a loop.
+2 - Using the Spotify dataset file dataset-of-00s.csv (from the zip file you downloaded in step 1), can you monitor the progress of tuning the hyperparameters for a random forest model? The label of the dataset is in the target column.
+3- Can you set a timeout of 5 minutes for the hyperparameter tuning process using a with block?
+4- Can you repeat #3 using a decorator instead?
+
