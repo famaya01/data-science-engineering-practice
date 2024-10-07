@@ -1,2 +1,2 @@
-data\spotify_600k
-data\spotify_data
+data/spotify_600k/*
+data/spotify_data/*
